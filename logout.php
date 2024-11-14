@@ -21,7 +21,7 @@ if (isset($_COOKIE['user_id'])) {
             $log_stmt = $connForLogs->prepare("INSERT INTO admin_logs (email, activity_type, user_type) VALUES (?, 'Logout', ?)");
         } else if ($user_type === 'user') {
             // Prepare statement for user logs
-            $log_stmt = $connForLogs->prepare("INSERT INTO user_accounts (email, activity_type, user_type) VALUES (?, 'Logout', ?)");
+            $log_stmt = $connForLogs->prepare("INSERT INTO user_logs (email, activity_type, user_type) VALUES (?, 'Logout', ?)");
         } else {
             // Optional: log unexpected user types or handle them
         }
