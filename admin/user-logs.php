@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-    include("../components/admin-header.php"); 
+    include("../components/admin-header.php");
 
     // HANDLE DELETE REQUEST
     if (isset($_POST['delete_logs'])) {
@@ -20,10 +20,10 @@
             $warning_msg[] = 'Log already deleted!';
         }
     }
-    
+
     // FETCH ALL DATA OF ADMIN LOGS
     $user_logs = $connForLogs->query("SELECT * FROM `user_logs`")->fetchAll(PDO::FETCH_ASSOC);
-    
+
 
 ?>
 
@@ -45,8 +45,8 @@
 
 
 
-                <!-- DataTable -->
-                <div class="card shadow mb-4">
+        <!-- DataTable -->
+        <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             </div>
@@ -73,9 +73,9 @@
                         </tfoot>
                         <tbody>
                             <?php
-                                $count = 1;
-                                foreach ($user_logs as $logs):
-                                ?>
+                            $count = 1;
+                            foreach ($user_logs as $logs):
+                            ?>
                                 <tr>
                                     <td><?php echo $count++; ?></td>
                                     <td><?php echo ($logs['email']); ?></td>
@@ -117,8 +117,6 @@
 
 <script>
     // Delete confirmation
-    $(document).ready(function() {
-        $('#dataTable').DataTable();
         $('.delete-btn').on('click', function() {
             const form = $(this).closest('.delete-form');
             const reviewId = form.find('input[name="delete_id"]').val();
@@ -138,7 +136,6 @@
                 }
             });
         });
-    });
 </script>
 </body>
 
