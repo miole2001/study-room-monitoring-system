@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 14, 2024 at 09:30 AM
+-- Generation Time: Nov 20, 2024 at 04:40 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -40,8 +40,8 @@ CREATE TABLE `admin_logs` (
 --
 
 INSERT INTO `admin_logs` (`id`, `email`, `activity_type`, `user_type`, `timestamp`) VALUES
-(1, 'admin@gmail.com', 'Login', 'admin', '2024-11-13 06:48:15'),
-(2, 'admin@gmail.com', 'Logout', 'admin', '2024-11-13 06:49:26');
+(1, 'admin@gmail.com', 'Logout', 'admin', '2024-11-19 09:57:44'),
+(2, 'admin@gmail.com', 'Logout', 'admin', '2024-11-19 09:59:40');
 
 -- --------------------------------------------------------
 
@@ -56,6 +56,14 @@ CREATE TABLE `user_logs` (
   `user_type` varchar(40) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_logs`
+--
+
+INSERT INTO `user_logs` (`id`, `email`, `activity_type`, `user_type`, `timestamp`) VALUES
+(1, 'user@gmail.com', 'Login', 'client', '2024-11-19 09:57:38'),
+(2, 'user@gmail.com', 'Login', 'client', '2024-11-19 09:59:37');
 
 --
 -- Indexes for dumped tables
@@ -87,7 +95,7 @@ ALTER TABLE `admin_logs`
 -- AUTO_INCREMENT for table `user_logs`
 --
 ALTER TABLE `user_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
