@@ -48,7 +48,7 @@ include ('../components/alerts.php');
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-chalkboard-teacher"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">SRMS</div>
             </a>
@@ -58,9 +58,10 @@ include ('../components/alerts.php');
 
             <!-- analytics page -->
             <li class="nav-item active">
-                <a class="nav-link" href="user.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>dashboard</span></a>
+                <a class="nav-link" href="rooms.php">
+                    <i class="fas fas fa-building"></i>
+                    <span>Rooms</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -74,7 +75,7 @@ include ('../components/alerts.php');
             <!-- my profile page -->
             <li class="nav-item">
                 <a class="nav-link" href="profile.php">
-                    <i class="fas fa-fw fa-user"></i>
+                    <i class="fas fa-user-cog"></i>
                     <span>My Profile</span>
                 </a>
             </li>
@@ -90,14 +91,14 @@ include ('../components/alerts.php');
             <!-- logs page -->
             <li class="nav-item">
                 <a class="nav-link" href="my-logs.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-file-alt"></i>
                     <span>Logs</span></a>
             </li>
 
             <!-- logout -->
             <li class="nav-item">
                 <a class="nav-link" href="#" id="logout">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span></a>
             </li>
 

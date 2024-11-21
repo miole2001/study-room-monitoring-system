@@ -45,7 +45,7 @@ if (isset($_COOKIE['user_id'])) {
 setcookie('user_id', '', time() - 1, '/');
 
 // Redirect to login page
-header('Location: imdex.php');
+header('Location: index.php');
 exit();
 
 ?>

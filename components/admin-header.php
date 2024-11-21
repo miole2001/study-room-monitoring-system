@@ -48,7 +48,7 @@ include ('../components/alerts.php');
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-chalkboard-teacher"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">SRMS</div>
             </a>
@@ -74,7 +74,7 @@ include ('../components/alerts.php');
             <!-- my profile page -->
             <li class="nav-item">
                 <a class="nav-link" href="profile.php">
-                    <i class="fas fa-fw fa-user"></i>
+                    <i class="fas fa-user-cog"></i>
                     <span>My Profile</span>
                 </a>
             </li>
@@ -82,8 +82,24 @@ include ('../components/alerts.php');
             <!-- user account page -->
             <li class="nav-item">
                 <a class="nav-link" href="user-accounts.php">
-                    <i class="fas fa-fw fa-user"></i>
+                    <i class="fas fa-users"></i>
                     <span>User Accounts</span>
+                </a>
+            </li>
+
+            <!-- user account page -->
+            <li class="nav-item">
+                <a class="nav-link" href="rooms.php">
+                    <i class="fas fa-building"></i>
+                    <span>All Rooms</span>
+                </a>
+            </li>
+
+            <!-- user account page -->
+            <li class="nav-item">
+                <a class="nav-link" href="room-usage.php">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Room Usage</span>
                 </a>
             </li>
 
@@ -99,21 +115,21 @@ include ('../components/alerts.php');
             <!-- admin logs page -->
             <li class="nav-item">
                 <a class="nav-link" href="admin-logs.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-file-alt"></i>
                     <span>My Logs</span></a>
             </li>
 
             <!-- user logs page -->
             <li class="nav-item">
                 <a class="nav-link" href="user-logs.php">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-file-alt"></i>
                     <span>User Logs</span></a>
             </li>
 
             <!-- logout -->
             <li class="nav-item">
                 <a class="nav-link" href="#" id="logout">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span></a>
             </li>
 

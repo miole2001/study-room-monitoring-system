@@ -9,28 +9,25 @@
 
     // Handle the update profile form submission
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Get updated values from form
+        $student_id = $_POST['student_id'];
         $name = $_POST['name'];
+        $year_level = $_POST['year_level'];
         $email = $_POST['email'];
         $password = $_POST['password'];
 
         if (!empty($password)) {
 
-            // If the user provided a new password, hash it
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         } else {
 
-            // If the password field is empty, keep the existing password
             $hashed_password = $user['password'];
         }
 
-        // Prepare the update SQL query
-        $update_sql = "UPDATE `user_accounts` SET `name` = ?, `email` = ?, `password` = ? WHERE `id` = ?";
+        $update_sql = "UPDATE `user_accounts` SET `student_id` = ?, `name` = ?, `year_level` = ?, `email` = ?, `password` = ? WHERE `id` = ?";
         $stmt_update = $connForAccounts->prepare($update_sql);
         
-        $stmt_update->execute([$name, $email, $hashed_password, $user_id]);
+        $stmt_update->execute([$student_id, $name, $year_level, $email, $hashed_password, $user_id]);
 
-        // Redirect to profile page after update
         header('Location: profile.php');
         exit;
     }
@@ -83,12 +80,35 @@
         <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Student ID</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            <?php echo ($user['student_id']); ?>
+                        </div>
+                    </div>
+
+                    <hr>
+
                     <div class="row">
                         <div class="col-sm-3">
                             <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
                             <?php echo ($user['name']); ?>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Year Level</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            <?php echo ($user['year_level']); ?>
                         </div>
                     </div>
 
@@ -134,10 +154,23 @@
 
             <div class="modal-body">
                 <form action="" method="post">
+
+                    <!-- student id Input -->
+                    <div class="form-group">
+                        <label for="student_id">Student ID</label>
+                        <input type="text" class="form-control" id="student_id" name="student_id" value="<?php echo ($user['student_id']); ?>">
+                    </div>
+
                     <!-- Name Input -->
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" class="form-control" id="name" name="name" value="<?php echo ($user['name']); ?>">
+                    </div>
+
+                    <!-- year level Input -->
+                    <div class="form-group">
+                        <label for="year_level">Year Level</label>
+                        <input type="text" class="form-control" id="year_level" name="year_level" value="<?php echo ($user['year_level']); ?>">
                     </div>
 
                     <!-- Email Input -->

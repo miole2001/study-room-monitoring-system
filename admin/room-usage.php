@@ -1,28 +1,31 @@
 <?php 
     include('../components/admin-header.php'); 
 
-    // HANDLE DELETE REQUEST
-    if (isset($_POST['delete_account'])) {
+    if (isset($_POST['delete_usage'])) {
         $delete_id = $_POST['delete_id'];
-        
-        $verify_delete = $connForAccounts->prepare("SELECT * FROM `user_accounts` WHERE id = ?");
+
+        $verify_delete = $connForReservation->prepare("SELECT * FROM `room_reservations` WHERE id = ?");
         $verify_delete->execute([$delete_id]);
-        
+
         if ($verify_delete->rowCount() > 0) {
-            $delete_account = $connForAccounts->prepare("DELETE FROM `user_accounts` WHERE id = ?");
-            if ($delete_account->execute([$delete_id])) {
-                $success_msg[] = 'Account deleted!';
+            $delete_usage = $connForReservation->prepare("DELETE FROM `room_reservations` WHERE id = ?");
+            if ($delete_usage->execute([$delete_id])) {
+                $success_msg[] = 'usage deleted!';
             } else {
-                $error_msg[] = 'Error deleting Account.';
+                $error_msg[] = 'Error deleting usage.';
             }
         } else {
-            $warning_msg[] = 'Account already deleted!';
+            $warning_msg[] = 'usage already deleted!';
         }
     }
 
-    $user_accounts = $connForAccounts->query("SELECT * FROM `user_accounts` WHERE user_type = 'user'")->fetchAll(PDO::FETCH_ASSOC);
+
+    
+
+    $room_usage = $connForReservation->query("SELECT * FROM `room_reservations`")->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
+
 <!-- Main Content -->
 <div id="content">
 
@@ -35,7 +38,7 @@
 
         <!-- Page Heading -->
         <div class="text-center mb-4">
-            <h1 class="mb-0 text-gray-800">Student Accounts</h1>
+            <h1 class="mb-0 text-gray-800">ROOM USAGE</h1>
         </div>
 
 
@@ -49,47 +52,47 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Profile</th>
-                                <th>Student id</th>
-                                <th>Name</th>
-                                <th>Year Level</th>
-                                <th>Email</th>
-                                <th>Password</th>
-                                <th>Date Registered</th>
+                                <th>Room Name</th>
+                                <th>Location</th>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Date</th>
+                                <th>Time Check-in</th>
+                                <th>Time Check-out</th>
                                 <th>Action(s)</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>Profile</th>
-                                <th>Student id</th>
-                                <th>Name</th>
-                                <th>Year Level</th>
-                                <th>Email</th>
-                                <th>Password</th>
-                                <th>Date Registered</th>
+                                <th>Room Name</th>
+                                <th>Location</th>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Date</th>
+                                <th>Time Check-in</th>
+                                <th>Time Check-out</th>
                                 <th>Action(s)</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             <?php
                                 $count = 1;
-                                foreach ($user_accounts as $account):
+                                foreach ($room_usage as $usage):
                                 ?>
                                 <tr>
                                     <td><?php echo $count++; ?></td>
-                                    <td><img src="../image/profile/<?php echo ($account['image']); ?>" alt="Image" style="width: 100px; height: auto;"></td>
-                                    <td><?php echo ($account['student_id']); ?></td>
-                                    <td><?php echo ($account['name']); ?></td>
-                                    <td><?php echo ($account['year_level']); ?></td>
-                                    <td><?php echo ($account['email']); ?></td>
-                                    <td><?php echo ($account['password']); ?></td>
-                                    <td><?php echo ($account['date_registered']); ?></td>
+                                    <td><?php echo ($usage['room_name']); ?></td>
+                                    <td><?php echo ($usage['location']); ?></td>
+                                    <td><?php echo ($usage['student_id']); ?></td>
+                                    <td><?php echo ($usage['student_name']); ?></td>
+                                    <td><?php echo date("M j, Y", strtotime($usage['date'])); ?></td>
+                                    <td><?php echo date("g:i A", strtotime($usage['check_in'])); ?></td>
+                                    <td><?php echo date("g:i A", strtotime($usage['check_out'])); ?></td>
                                     <td>
                                         <form method="POST" action="" class="delete-form">
-                                            <input type="hidden" name="delete_id" value="<?php echo ($account['id']); ?>">
-                                            <input type="hidden" name="delete_account" value="1">
+                                            <input type="hidden" name="delete_id" value="<?php echo ($usage['id']); ?>">
+                                            <input type="hidden" name="delete_usage" value="1">
                                             <button type="button" class="btn btn-danger btn-sm delete-btn">Delete</button>
                                         </form>
                                     </td>
@@ -104,10 +107,8 @@
     <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
-
-
 <script>
-        // Delete confirmation
+    // Delete confirmation
         $('.delete-btn').on('click', function() {
             const form = $(this).closest('.delete-form');
             const reviewId = form.find('input[name="delete_id"]').val();
@@ -122,13 +123,13 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    console.log("Deleting voter ID: " + reviewId);
-                    form.submit();
+                    console.log("Deleting log ID: " + reviewId); // Debug log
+                    form.submit(); // Submit the form if confirmed
                 }
             });
         });
-
 </script>
+
 <!-- Footer -->
 <?php include("../components/footer.php"); ?>
 <!-- End of Footer -->
@@ -138,8 +139,8 @@
 
 </div>
 <!-- End of Page Wrapper -->
- <?php include('../components/scripts.php'); ?>
+<?php include('../components/scripts.php'); ?>
+
 </body>
 
 </html>
-

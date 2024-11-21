@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2024 at 04:40 AM
+-- Generation Time: Nov 21, 2024 at 08:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -51,8 +51,10 @@ INSERT INTO `admin_account` (`id`, `image`, `name`, `email`, `password`, `date_r
 
 CREATE TABLE `user_accounts` (
   `id` int(11) NOT NULL,
+  `student_id` varchar(100) NOT NULL,
   `image` varchar(255) NOT NULL,
   `name` varchar(100) NOT NULL,
+  `year_level` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `user_type` varchar(40) NOT NULL,
@@ -63,9 +65,9 @@ CREATE TABLE `user_accounts` (
 -- Dumping data for table `user_accounts`
 --
 
-INSERT INTO `user_accounts` (`id`, `image`, `name`, `email`, `password`, `user_type`, `date_registered`) VALUES
-(1, 'profile1.png', 'user', 'user@gmail.com', '$2y$10$.esXDl4C7dHmlu4WIJPaf.JJGsjDr3FoqNlrbLMoSvIIPR77FCGkK', 'user', '2024-11-13 14:47:43'),
-(2, 'profile1.png', 'admin', 'admin@gmail.com', '$2y$10$.esXDl4C7dHmlu4WIJPaf.JJGsjDr3FoqNlrbLMoSvIIPR77FCGkK', 'admin', '2024-11-13 14:47:43');
+INSERT INTO `user_accounts` (`id`, `student_id`, `image`, `name`, `year_level`, `email`, `password`, `user_type`, `date_registered`) VALUES
+(1, '24-20002', 'profile1.png', 'user', 'Third Year', 'user@gmail.com', '$2y$10$.esXDl4C7dHmlu4WIJPaf.JJGsjDr3FoqNlrbLMoSvIIPR77FCGkK', 'user', '2024-11-13 14:47:43'),
+(3, '24-20001', 'profile3.png', 'John Doe', 'First Year', 'john@gmail.com', '$2y$10$U.KCn54aRu6nfzZOkUSYpekU5S2MNQcSloVtgl0d7uGHRXZ/jeKLW', 'user', '2024-11-22 01:10:44');
 
 --
 -- Indexes for dumped tables
@@ -97,7 +99,7 @@ ALTER TABLE `admin_account`
 -- AUTO_INCREMENT for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

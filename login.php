@@ -56,7 +56,7 @@
 
                         // Set cookie and redirect to client dashboard
                         setcookie('user_id', $fetch['id'], time() + 60 * 60 * 24 * 30, '/');
-                        header('Location: user/user.php');
+                        header('Location: user/rooms.php');
                         exit();
                     } else {
                         $warning_msg[] = 'Incorrect user password!';
@@ -92,7 +92,7 @@
                 <input type="submit" name="submit" value="Login">
             </div>
             <div div class="text">
-                <h3>Don't have an account? <a href="register.php">Login now</a></h3>
+                <h3>Don't have an account? <a href="register.php">Register now</a></h3>
             </div>
         </form>
     </div>

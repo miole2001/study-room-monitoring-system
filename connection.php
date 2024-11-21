@@ -38,9 +38,9 @@
 
    //DATABASE CONNECTION FOR ADMIN & USER LOGS
 
-   // $db_name = 'mysql:host=localhost;dbname=Hotel_reservation';
-   // $db_user_name = 'root';
-   // $db_user_pass = '';
+   $db_name = 'mysql:host=localhost;dbname=srms_reservation';
+   $db_user_name = 'root';
+   $db_user_pass = '';
 
-   // $connForReservation = new PDO($db_name, $db_user_name, $db_user_pass);
+   $connForReservation = new PDO($db_name, $db_user_name, $db_user_pass);
 ?>
