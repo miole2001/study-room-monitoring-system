@@ -1,4 +1,28 @@
-<?php include("../components/admin-header.php"); ?>
+<?php 
+
+    include("../components/admin-header.php"); 
+
+    // Fetch all votes using PDO
+    $room_usage = $connForReservation->query("SELECT * FROM `room_reservations`")->fetchAll(PDO::FETCH_ASSOC);
+
+    $query = "SELECT COUNT(*) AS student_count FROM `user_accounts`";
+    $run_query = $connForAccounts->prepare($query);
+    $run_query->execute();
+    $student_count = $run_query->fetch(PDO::FETCH_ASSOC)['student_count'];
+
+
+    $query = "SELECT COUNT(*) AS room_count FROM `rooms`";
+    $run_query = $connForReservation->prepare($query);
+    $run_query->execute();
+    $room_count = $run_query->fetch(PDO::FETCH_ASSOC)['room_count'];
+
+
+    $query = "SELECT COUNT(*) AS usage_count FROM `room_reservations`";
+    $run_query = $connForReservation->prepare($query);
+    $run_query->execute();
+    $usage_count = $run_query->fetch(PDO::FETCH_ASSOC)['usage_count'];
+
+?>
 
 
 <!-- Main Content -->
@@ -19,83 +43,60 @@
         <!-- Content Row -->
         <div class="row">
 
-            <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Earnings (Monthly)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                    Total Student Accounts
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <?php echo $student_count; ?>
+                                </div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                <i class="fas fa-users fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Earnings (Annual)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                    Total Room Usage
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <?php echo $usage_count; ?>
+                                </div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                <i class="fas fa-clock fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-info shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                </div>
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar"
-                                                style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-warning shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Pending Requests</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                    Total Rooms
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <?php echo $room_count; ?>
+                                </div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                <i class="fas fa-building fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -113,33 +114,44 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>#</th>
+                                <th>Room Name</th>
+                                <th>Location</th>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Date</th>
+                                <th>Time Check-in</th>
+                                <th>Time Check-out</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>#</th>
+                                <th>Room Name</th>
+                                <th>Location</th>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Date</th>
+                                <th>Time Check-in</th>
+                                <th>Time Check-out</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
+                            <?php
+                                $count = 1;
+                                foreach ($room_usage as $usage):
+                                ?>
+                                <tr>
+                                    <td><?php echo $count++; ?></td>
+                                    <td><?php echo ($usage['room_name']); ?></td>
+                                    <td><?php echo ($usage['location']); ?></td>
+                                    <td><?php echo ($usage['student_id']); ?></td>
+                                    <td><?php echo ($usage['student_name']); ?></td>
+                                    <td><?php echo date("M j, Y", strtotime($usage['date'])); ?></td>
+                                    <td><?php echo date("g:i A", strtotime($usage['check_in'])); ?></td>
+                                    <td><?php echo date("g:i A", strtotime($usage['check_out'])); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
