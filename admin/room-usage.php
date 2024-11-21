@@ -19,9 +19,6 @@
         }
     }
 
-
-    
-
     $room_usage = $connForReservation->query("SELECT * FROM `room_reservations`")->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
